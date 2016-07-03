@@ -28,9 +28,9 @@ public abstract class BaseCommand implements CommandExecutor {
     	this.plugin.getCommand(this.cmdName).setPermission(permission);
     }
     
-    protected abstract boolean doPlayerCommand(Player player, Command cmd, String[] args) throws Exception;
+    protected abstract boolean doPlayerCommand(Player player, Command cmd, String commandLabel, String[] args) throws Exception;
     
-    protected boolean doConsoleCommand(CommandSender sender, Command cmd, String[] args) throws Exception {
+    protected boolean doConsoleCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) throws Exception {
     	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Command should be used by a player."));
     	return true;
     }
@@ -52,10 +52,10 @@ public abstract class BaseCommand implements CommandExecutor {
 		            return true;
 		        }
 		        
-					return doPlayerCommand(player, cmd, args);
+					return doPlayerCommand(player, cmd, commandLabel, args);
 	        }
 	        else {
-	        	return doConsoleCommand(sender, cmd, args);
+	        	return doConsoleCommand(sender, cmd, commandLabel, args);
 	        }
 		} catch (Exception e) {
 			plugin.log(Level.SEVERE, e.toString());

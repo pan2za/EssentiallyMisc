@@ -33,6 +33,7 @@ public class MainPlugin extends JavaPlugin {
 
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdHeal(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdFly(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdGameMode(this);
     }
 
     private void createConfigFile(InputStream in, File file) {

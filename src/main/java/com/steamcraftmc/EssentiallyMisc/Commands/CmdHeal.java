@@ -22,7 +22,7 @@ public class CmdHeal extends BaseCommand {
 	}
 
 	@Override
-	protected boolean doPlayerCommand(Player player, Command cmd, String[] args) {
+	protected boolean doPlayerCommand(Player player, Command cmd, String commandLabel, String[] args) {
 
 		Player target = player;
         if (args.length > 0) {

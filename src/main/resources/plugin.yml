@@ -5,9 +5,9 @@ author: rknapp
 load: startup
 commands:
   gamemode:
-    aliases: [gm, creative, survival, adventure, spectator, gmc, gma, gms, gmt]
+    aliases: [gm, creative, survival, adventure, spectator, gmc, gms, gma, gmp]
     description: Changes a player's gamemode.
-    usage: /gamemode [c|s|a|p|t|creative|survival|adventure|spectator|toggle] [player]
+    usage: /gamemode [c|s|a|p|creative|survival|adventure|spectator] [player]
     permission: essentials.gamemode
     permission-message: '§4You do not have permission to use this command.'
     default: op
