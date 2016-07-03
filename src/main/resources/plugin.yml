@@ -1,0 +1,26 @@
+name: EssentiallyMisc
+main: com.steamcraftmc.EssentiallyMisc.MainPlugin
+version: '1.0'
+author: rknapp
+load: startup
+commands:
+  gamemode:
+    aliases: [gm, creative, survival, adventure, spectator, gmc, gma, gms, gmt]
+    description: Changes a player's gamemode.
+    usage: /gamemode [c|s|a|p|t|creative|survival|adventure|spectator|toggle] [player]
+    permission: essentials.gamemode
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+  fly:
+    description: Allows for creative mode fly.
+    usage: /fly [player]
+    permission: essentials.fly
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+  heal:
+    description: Heals a player.
+    usage: /heal [player]
+    permission: essentials.heal
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+
