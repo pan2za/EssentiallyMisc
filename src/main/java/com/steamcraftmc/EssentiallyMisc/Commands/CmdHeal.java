@@ -63,7 +63,7 @@ public class CmdHeal extends BaseCommand {
         player.setHealth(newAmount);
         player.setFoodLevel(20);
         player.setFireTicks(0);
-		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Unable to return the dead to life."));
+		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6You have been healed."));
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
