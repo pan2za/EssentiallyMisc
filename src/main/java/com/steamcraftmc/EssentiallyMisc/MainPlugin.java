@@ -8,6 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class MainPlugin extends JavaPlugin {
 	public final   Logger  _logger;
 	public Boolean _exLogging;
+	public final MainConfig Config;
 
 	public MainPlugin() {
 		_exLogging = true;
@@ -15,7 +16,8 @@ public class MainPlugin extends JavaPlugin {
 		_logger.setLevel(Level.ALL);
 		_logger.log(Level.CONFIG, "Plugin initializing...");
 		
-		this.getConfig().options().copyDefaults(true);
+		Config = new MainConfig(this);
+		Config.load();
 	}
 
 	public void log(Level level, String text) {
@@ -32,6 +34,7 @@ public class MainPlugin extends JavaPlugin {
         }
 
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdHeal(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdFixLight(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdFly(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdGameMode(this);
     }

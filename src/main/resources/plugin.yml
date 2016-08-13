@@ -11,6 +11,13 @@ commands:
     permission: essentials.gamemode
     permission-message: '§4You do not have permission to use this command.'
     default: op
+  fixlight:
+    aliases: ['/fixlight']
+    description: Fixes the chunk/block lighting in a given radius
+    usage: /fixlight [radius]
+    permission: essentials.fixlight
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
   fly:
     description: Allows for creative mode fly.
     usage: /fly [player]
