@@ -1,5 +1,6 @@
 package com.steamcraftmc.EssentiallyMisc.Commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -33,12 +34,12 @@ public class CmdFixLight extends BaseCommand
 		int radius = Integer.parseInt(args[0]);
 		if (radius < 0)
 		{
-			player.sendMessage("&4Radius may not be a negative value.");
+			player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Radius may not be a negative value."));
 			return true;
 		}
-		if (radius > plugin.Config.getInt("lighting.maxradius", 32))
+		if (radius > plugin.Config.getInt("lighting.maxradius", 16))
 		{
-			player.sendMessage(String.format("&4The maxium radius allowed is &6%d&4.", plugin.Config.getInt("lighting.maxradius", 32)));
+			player.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format("&4The maxium radius allowed is &6%d&4.", plugin.Config.getInt("lighting.maxradius", 16))));
 			return true;
 		}
 		
@@ -49,8 +50,8 @@ public class CmdFixLight extends BaseCommand
 		
 		int side = (1 + radius * 2);
 		int target = side * side;
-		player.sendMessage("&6Chunks around you will now be relighted.");
-		player.sendMessage(String.format("&6Radius &7%d&6, Side &7%d&6, Chunks &7%d&6.", radius, side, target));
+		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Chunks around you will now be relighted."));
+		player.sendMessage(ChatColor.translateAlternateColorCodes('&', String.format("&6Radius &7%d&6, Side &7%d&6, Chunks &7%d&6.", radius, side, target)));
 		
 		// Apply
 		for (int deltaX = -radius; deltaX <= radius; deltaX++)
@@ -64,7 +65,7 @@ public class CmdFixLight extends BaseCommand
 		}
 		
 		// Post Inform
-		player.sendMessage("&6Chunk relight complete.");
+		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Chunk relight complete."));
 		return true;
 	}
 	
