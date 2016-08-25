@@ -3,10 +3,12 @@ package com.steamcraftmc.EssentiallyMisc;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
  
 public class MainPlugin extends JavaPlugin {
 	public final   Logger  _logger;
+	private WorldEvents _listener;
 	public Boolean _exLogging;
 	public final MainConfig Config;
 
@@ -37,6 +39,11 @@ public class MainPlugin extends JavaPlugin {
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdFixLight(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdFly(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdGameMode(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdSetText(this);
+
+    	_listener = new WorldEvents(this);
+        getServer().getPluginManager().registerEvents(_listener, this);
+		log(Level.INFO, "Plugin listening for events.");
     }
 
     private void createConfigFile(InputStream in, File file) {
@@ -56,6 +63,7 @@ public class MainPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
+    	HandlerList.unregisterAll(_listener);
     }
 
 }

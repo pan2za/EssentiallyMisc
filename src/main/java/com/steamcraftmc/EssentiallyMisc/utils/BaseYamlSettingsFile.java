@@ -15,7 +15,7 @@ import org.bukkit.plugin.Plugin;
 
 public abstract class BaseYamlSettingsFile {
 
-	private final String _filename;
+	private final String _filename; 
 	protected final Plugin plugin;
 	private final Logger _logger;
 	private final File _configLocation;
