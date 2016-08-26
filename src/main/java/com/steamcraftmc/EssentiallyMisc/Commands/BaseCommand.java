@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 public abstract class BaseCommand implements CommandExecutor {
@@ -26,6 +27,9 @@ public abstract class BaseCommand implements CommandExecutor {
         this.maxArgs = maxArg;
     	this.plugin.getCommand(this.cmdName).setExecutor(this);
     	this.plugin.getCommand(this.cmdName).setPermission(permission);
+    	if (this instanceof TabCompleter) {
+    		this.plugin.getCommand(this.cmdName).setTabCompleter((TabCompleter)this);    		
+    	}
     }
     
     protected abstract boolean doPlayerCommand(Player player, Command cmd, String commandLabel, String[] args) throws Exception;

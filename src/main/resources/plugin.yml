@@ -18,9 +18,10 @@ commands:
     permission: essentials.fixlight
     permission-message: '§4You do not have permission to use this command.'
     default: op
-  settext:
-    description: Changes the text on the sign you are looking at.
-    usage: /settext <line 1-4> new text line
+  edit:
+    aliases: [edittext]
+    description: Changes a line of text on the sign you are looking at.
+    usage: /edit <line 1-4> new text line
     permission: essentials.signs.edit
     permission-message: '§4You do not have permission to use this command.'
     default: op
