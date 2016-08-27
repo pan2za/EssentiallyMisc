@@ -14,7 +14,7 @@ public class CmdFly extends BaseCommand {
 	Map<String, ConfigurationSection> allKits;
 
 	public CmdFly(MainPlugin plugin) {
-		super(plugin, "essentials.fly", "fly", 0, 1);
+		super(plugin, "fly", 0, 1);
 	}
 
 	@Override

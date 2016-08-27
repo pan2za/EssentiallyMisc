@@ -18,8 +18,20 @@ public abstract class BaseCommand implements CommandExecutor {
     protected final String cmdName;
     private final int minArgs;
     private final int maxArgs;
+    
+    public BaseCommand(MainPlugin plugin, String command) {
+    	this(plugin, command, "essentials." + command, 0, 0);
+	}
 
-    public BaseCommand(MainPlugin plugin, String permission, String command, int minArg, int maxArg) {
+    public BaseCommand(MainPlugin plugin, String command, int maxArg) {
+    	this(plugin, command, "essentials." + command, 0, maxArg);
+	}
+
+    public BaseCommand(MainPlugin plugin, String command, int minArg, int maxArg) {
+    	this(plugin, command, "essentials." + command, minArg, maxArg);
+	}
+
+    public BaseCommand(MainPlugin plugin, String command, String permission, int minArg, int maxArg) {
         this.plugin = plugin;
         this.permission = permission;
         this.cmdName = command;
@@ -31,8 +43,8 @@ public abstract class BaseCommand implements CommandExecutor {
     		this.plugin.getCommand(this.cmdName).setTabCompleter((TabCompleter)this);    		
     	}
     }
-    
-    protected abstract boolean doPlayerCommand(Player player, Command cmd, String commandLabel, String[] args) throws Exception;
+
+	protected abstract boolean doPlayerCommand(Player player, Command cmd, String commandLabel, String[] args) throws Exception;
     
     protected boolean doConsoleCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) throws Exception {
     	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Command should be used by a player."));

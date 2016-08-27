@@ -10,6 +10,7 @@ public class MainPlugin extends JavaPlugin {
 	private WorldEvents _listener;
 	public Boolean _exLogging;
 	public final MainConfig Config;
+	public com.steamcraftmc.EssentiallyMisc.Commands.CmdAfk afk;
 
 	public MainPlugin() {
 		_exLogging = true;
@@ -32,14 +33,17 @@ public class MainPlugin extends JavaPlugin {
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdFly(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdGameMode(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdSetText(this);
+        afk = new com.steamcraftmc.EssentiallyMisc.Commands.CmdAfk(this);
 
     	_listener = new WorldEvents(this);
         getServer().getPluginManager().registerEvents(_listener, this);
-		log(Level.INFO, "Plugin listening for events.");
+        afk.start();
+        log(Level.INFO, "Plugin listening for events.");
     }
 
     @Override
     public void onDisable() {
+        afk.stop();
     	HandlerList.unregisterAll(_listener);
     }
 

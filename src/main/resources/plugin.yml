@@ -4,37 +4,123 @@ version: '1.0'
 author: rknapp
 load: startup
 commands:
+#Admin-only commands:
   gamemode:
     aliases: [gm, creative, survival, adventure, spectator, gmc, gms, gma, gmp]
     description: Changes a player's gamemode.
-    usage: /gamemode [c|s|a|p|creative|survival|adventure|spectator] [player]
+    usage: /<command> [c|s|a|p|creative|survival|adventure|spectator] [player]
     permission: essentials.gamemode
     permission-message: '§4You do not have permission to use this command.'
     default: op
-  fixlight:
-    aliases: ['/fixlight']
-    description: Fixes the chunk/block lighting in a given radius.
-    usage: /fixlight [radius]
-    permission: essentials.fixlight
+  gc:
+    description: Reports memory, uptime and tick info.
+    usage: /<command> [all]
+    aliases: [lag,mem,memory]
+    permission: essentials.gc
     permission-message: '§4You do not have permission to use this command.'
     default: op
-  edit:
-    aliases: [edittext]
-    description: Changes a line of text on the sign you are looking at.
-    usage: /edit <line 1-4> new text line
-    permission: essentials.signs.edit
+  god:
+    description: Enables god-like powers.
+    usage: /<command> [player] [on|off]
+    aliases: [godmode]
+    permission: essentials.god
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+  repair:
+    description: Repairs the durability of the item you are holding.
+    usage: /<command> [all]
+    aliases: [fix]
+    permission: essentials.repair
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+#Moderator commands:
+  fixlight:
+    aliases: [relight]
+    description: Fixes the chunk/block lighting in a given radius.
+    usage: /<command> [radius]
+    permission: essentials.fixlight
     permission-message: '§4You do not have permission to use this command.'
     default: op
   fly:
     description: Allows for creative mode fly.
-    usage: /fly [player]
+    usage: /<command> [player]
     permission: essentials.fly
     permission-message: '§4You do not have permission to use this command.'
     default: op
   heal:
     description: Heals a player.
-    usage: /heal [player]
+    usage: /<command> [player]
     permission: essentials.heal
     permission-message: '§4You do not have permission to use this command.'
     default: op
-
+  feed:
+    description: Satisfy the hunger.
+    usage: /<command> [player]
+    aliases: [eat]
+    permission: essentials.feed
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+  burn:
+    description: Set a player on fire.
+    usage: /<command> <player> <seconds>
+    aliases: []
+    permission: essentials.burn
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+  fireball:
+    description: Throw a fireball.
+    usage: /<command> [small|skull]
+    aliases: []
+    permission: essentials.fireball
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+  lightning:
+    description: The power of Thor. Strike at cursor or player.
+    usage: /<command> [player] [power]
+    aliases: [smite,strike,thor]
+    permission: essentials.lightning
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+#Player commands:
+  afk:
+    description: Marks you as away-from-keyboard.
+    usage: /<command> [message...]
+    aliases: [away]
+    permission: essentials.afk
+    permission-message: '§4You do not have permission to use this command.'
+    default: true
+  hat:
+    description: Get some cool new headgear.
+    usage: /<command> [remove]
+    aliases: []
+    permission: essentials.hat
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+  editsign:
+    aliases: [edit,edittext]
+    description: Changes a line of text on the sign you are looking at.
+    usage: /<command> <line 1-4> new text line
+    permission: essentials.signs.edit
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+  near:
+    description: Lists the players near by or around a player.
+    usage: /<command> [playername] [radius]
+    aliases: [nearby]
+    permission: essentials.near
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+  suicide:
+    description: Prove your mortality.
+    usage: /<command>
+    aliases: []
+    permission: essentials.suicide
+    permission-message: '§4You do not have permission to use this command.'
+    default: true
+  time:
+    description: Display the world time.
+    usage: /<command>
+    aliases: []
+    permission: essentials.time
+    permission-message: '§4You do not have permission to use this command.'
+    default: true

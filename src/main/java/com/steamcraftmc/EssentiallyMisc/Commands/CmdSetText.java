@@ -1,6 +1,7 @@
 package com.steamcraftmc.EssentiallyMisc.Commands;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,16 +17,26 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import com.steamcraftmc.EssentiallyMisc.MainPlugin;
 
-public class CmdSetText extends BaseCommand implements TabCompleter
-{
+public class CmdSetText extends BaseCommand implements TabCompleter {
+	final HashSet<Material> _transparent = new HashSet<Material>();
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
-	
+
 	public CmdSetText(MainPlugin plugin) {
-		super(plugin, "essentials.signs.edit", "edit", 1, 25);
+		super(plugin, "edit", "essentials.signs.edit", 1, 25);
+		
+		for (Material m : Material.values()) {
+			if (m.isTransparent() && m != Material.SIGN && m != Material.SIGN_POST && m != Material.WALL_SIGN) {
+				_transparent.add(m);
+			}
+		}
 	}
-	
+
+	private Block getTargetBlock(Player player) {
+		return player.getTargetBlock(_transparent, 5);
+	}
+
 	// -------------------------------------------- //
 	// OVERRIDE
 	// -------------------------------------------- //
@@ -37,55 +48,50 @@ public class CmdSetText extends BaseCommand implements TabCompleter
 		}
 		int line = Integer.parseInt(args[0]);
 
-		Set<Material> m = null;
-		Block block = player.getTargetBlock(m, 5);
-		
+		Block block = getTargetBlock(player);
+
 		if (block == null || (block.getType() != Material.WALL_SIGN && block.getType() != Material.SIGN_POST)) {
-			player.sendMessage(
-					plugin.Config.get("messages.not-facing-sign", "&cYou must be facing a sign.")
-				);
+			player.sendMessage(plugin.Config.get("messages.not-facing-sign", "&cYou must be facing a sign."));
 			return true;
 		}
-		
-		Sign sign = (Sign)block.getState(); 
+
+		Sign sign = (Sign) block.getState();
 		StringBuilder sb = new StringBuilder();
 		for (int ix = 1; ix < args.length; ix++) {
-			if (ix > 1) sb.append(' ');
+			if (ix > 1)
+				sb.append(' ');
 			sb.append(args[ix]);
 		}
 
-		//Check build permissions directly below sign so as not to break signshop, unless they
-		//are changing the first line, which will break it anyway...
+		// Check build permissions directly below sign so as not to break
+		// signshop, unless they
+		// are changing the first line, which will break it anyway...
 		Block breaker = block;
 		if (line > 1) {
 			while (breaker.getType() == Material.WALL_SIGN || breaker.getType() == Material.SIGN_POST) {
 				breaker = breaker.getRelative(0, 1, 0);
 			}
 		}
-		
-		BlockBreakEvent placeEvent = new BlockBreakEvent(breaker, player);
-        plugin.getServer().getPluginManager().callEvent(placeEvent);
-        if (!placeEvent.isCancelled()) {
-	        String[] lines = sign.getLines();
-	        lines[line - 1] = sb.toString();
 
-	        SignChangeEvent chgEvent = new SignChangeEvent(block, player, lines);
-            plugin.getServer().getPluginManager().callEvent(chgEvent);
-        	if (!chgEvent.isCancelled()) {
-        		for (int ixl=0; ixl < 4; ixl++)
-        			sign.setLine(ixl, chgEvent.getLine(ixl));
-    			sign.update();
-    			player.sendMessage(
-    					plugin.Config.format("messages.sign-changed", "&6Changed the sign text on line {line} to {text}.",
-    							"line", args[0], "text", sb.toString())
-    				);
-    			return true;
-        	}
-        }
-		
-		player.sendMessage(
-				plugin.Config.get("messages.edit-cancel", "&cYou are unable to modify that sign.")
-			);
+		BlockBreakEvent placeEvent = new BlockBreakEvent(breaker, player);
+		plugin.getServer().getPluginManager().callEvent(placeEvent);
+		if (!placeEvent.isCancelled()) {
+			String[] lines = sign.getLines();
+			lines[line - 1] = sb.toString();
+
+			SignChangeEvent chgEvent = new SignChangeEvent(block, player, lines);
+			plugin.getServer().getPluginManager().callEvent(chgEvent);
+			if (!chgEvent.isCancelled()) {
+				for (int ixl = 0; ixl < 4; ixl++)
+					sign.setLine(ixl, chgEvent.getLine(ixl));
+				sign.update();
+				player.sendMessage(plugin.Config.format("messages.sign-changed",
+						"&6Changed the sign text on line {line} to {text}.", "line", args[0], "text", sb.toString()));
+				return true;
+			}
+		}
+
+		player.sendMessage(plugin.Config.get("messages.edit-cancel", "&cYou are unable to modify that sign."));
 		return true;
 	}
 
@@ -94,32 +100,30 @@ public class CmdSetText extends BaseCommand implements TabCompleter
 		ArrayList<String> response = new ArrayList<String>();
 		if (!(sender instanceof Player) || args.length == 0)
 			return response;
-		
+
 		if (args.length == 2 && args[1].length() == 0) {
 			args = new String[] { args[0] };
 		}
 		if (args.length != 1 || !args[0].matches("^[1234]\\s*$")) {
 			return response;
-		} 
+		}
 		int line = Integer.parseInt(args[0].trim());
 
-		Player player = (Player)sender;
-		Set<Material> m = null;
-		Block block = player.getTargetBlock(m, 5);
-		
+		Player player = (Player) sender;
+		Block block = getTargetBlock(player);
+
 		if (block == null || (block.getType() != Material.WALL_SIGN && block.getType() != Material.SIGN_POST)) {
 			return response;
 		}
-		
+
 		try {
-			Sign sign = (Sign)block.getState(); 
+			Sign sign = (Sign) block.getState();
 			response.add(args[0].trim() + " " + sign.getLine(line - 1).replace(ChatColor.COLOR_CHAR, '&'));
 			return response;
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 			return response;
 		}
 	}
-	
+
 }

@@ -15,7 +15,7 @@ public class CmdGameMode extends BaseCommand {
 	Map<String, ConfigurationSection> allKits;
 
 	public CmdGameMode(MainPlugin plugin) {
-		super(plugin, "essentials.gamemode", "gamemode", 0, 2);
+		super(plugin, "gamemode", 0, 2);
 	}
 
 	@Override

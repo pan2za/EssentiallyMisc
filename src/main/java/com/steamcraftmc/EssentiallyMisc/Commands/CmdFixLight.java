@@ -16,7 +16,7 @@ public class CmdFixLight extends BaseCommand
 	// -------------------------------------------- //
 	
 	public CmdFixLight(MainPlugin plugin) {
-		super(plugin, "essentials.fixlight", "fixlight", 1, 1);
+		super(plugin, "fixlight", 1, 1);
 	}
 	
 	// -------------------------------------------- //

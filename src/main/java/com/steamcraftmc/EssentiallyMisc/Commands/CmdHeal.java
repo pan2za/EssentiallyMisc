@@ -18,7 +18,7 @@ public class CmdHeal extends BaseCommand {
 	Map<String, ConfigurationSection> allKits;
 
 	public CmdHeal(MainPlugin plugin) {
-		super(plugin, "essentials.heal", "heal", 0, 1);
+		super(plugin, "heal", 0, 1);
 	}
 
 	@Override
