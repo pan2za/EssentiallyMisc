@@ -68,7 +68,7 @@ public class CmdGod extends BaseCommand implements Listener {
 			persist = false;
 			target = plugin.getServer().getPlayer(args[0]);
 			if (target == null) {
-            	player.sendMessage(plugin.Config.format("message.player-not-found", "&cPlayer not found."));
+            	player.sendMessage(plugin.Config.PlayerNotFound(args[0]));
             	return true;
 			}
 		}

@@ -15,7 +15,7 @@ public class CmdBurn extends BaseCommand {
         Player target = plugin.getServer().getPlayer(args[0]);
         if (target == null) {
         	player.sendMessage(plugin.Config.PlayerNotFound(args[0]));
-        	return false;
+        	return true;
         }
 
         int seconds = 30;
@@ -24,7 +24,7 @@ public class CmdBurn extends BaseCommand {
         }
 
         target.setFireTicks(seconds * 20);
-    	player.sendMessage(plugin.Config.format("message.burn", "&cPlayer has been set on fire."));
+    	player.sendMessage(plugin.Config.format("messages.burn", "&cPlayer has been set on fire."));
         return true;
 	}
 }
