@@ -81,6 +81,7 @@ public class ChunkWrap
 	// LIGHT LEVEL
 	//----------------------------------------------//
 	
+	@SuppressWarnings("deprecation")
 	public boolean recalcLightLevel()
 	{
 		if ( ! this.loadSurrounding(true))

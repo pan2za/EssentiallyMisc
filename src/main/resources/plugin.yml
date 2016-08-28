@@ -14,8 +14,8 @@ commands:
     default: op
   gc:
     description: Reports memory, uptime and tick info.
-    usage: /<command> [all]
-    aliases: [lag,mem,memory]
+    usage: /<command>
+    aliases: [mem,memory]
     permission: essentials.gc
     permission-message: '§4You do not have permission to use this command.'
     default: op
@@ -115,12 +115,5 @@ commands:
     usage: /<command>
     aliases: []
     permission: essentials.suicide
-    permission-message: '§4You do not have permission to use this command.'
-    default: true
-  time:
-    description: Display the world time.
-    usage: /<command>
-    aliases: []
-    permission: essentials.time
     permission-message: '§4You do not have permission to use this command.'
     default: true

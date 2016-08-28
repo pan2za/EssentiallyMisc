@@ -40,6 +40,7 @@ public class MainPlugin extends JavaPlugin {
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdLightning(this);
         fb = new com.steamcraftmc.EssentiallyMisc.Commands.CmdFireball(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdHat(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdGC(this);
                 
     	_listener = new WorldEvents(this);
         getServer().getPluginManager().registerEvents(_listener, this);

@@ -20,6 +20,7 @@ public class CmdHat extends BaseCommand {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	protected boolean doPlayerCommand(Player player, Command cmd, String commandLabel, String[] args) {
         
 		if (player.getItemInHand().getType() != Material.AIR) {
