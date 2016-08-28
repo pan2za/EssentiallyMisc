@@ -1,7 +1,6 @@
 package com.steamcraftmc.EssentiallyMisc.Commands;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,21 +15,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.SignChangeEvent;
 import com.steamcraftmc.EssentiallyMisc.MainPlugin;
+import com.steamcraftmc.EssentiallyMisc.utils.BlockUtil;
 
 public class CmdSetText extends BaseCommand implements TabCompleter {
-	final HashSet<Material> _transparent = new HashSet<Material>();
+	final Set<Material> _transparent;
 	// -------------------------------------------- //
 	// CONSTRUCT
 	// -------------------------------------------- //
 
 	public CmdSetText(MainPlugin plugin) {
-		super(plugin, "edit", "essentials.signs.edit", 1, 25);
-		
-		for (Material m : Material.values()) {
-			if (m.isTransparent() && m != Material.SIGN && m != Material.SIGN_POST && m != Material.WALL_SIGN) {
-				_transparent.add(m);
-			}
-		}
+		super(plugin, "editsign", "essentials.signs.edit", 1, 25);
+		_transparent = BlockUtil.getTransparentBlocks();
+		_transparent.remove(Material.SIGN);
+		_transparent.remove(Material.SIGN_POST);
+		_transparent.remove(Material.WALL_SIGN);
 	}
 
 	private Block getTargetBlock(Player player) {

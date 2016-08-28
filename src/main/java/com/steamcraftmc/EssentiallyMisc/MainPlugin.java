@@ -34,6 +34,9 @@ public class MainPlugin extends JavaPlugin {
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdGameMode(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdSetText(this);
         afk = new com.steamcraftmc.EssentiallyMisc.Commands.CmdAfk(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdBurn(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdLightning(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdTime(this);
 
     	_listener = new WorldEvents(this);
         getServer().getPluginManager().registerEvents(_listener, this);

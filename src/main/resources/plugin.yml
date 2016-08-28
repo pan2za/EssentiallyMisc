@@ -62,7 +62,7 @@ commands:
     default: op
   burn:
     description: Set a player on fire.
-    usage: /<command> <player> <seconds>
+    usage: /<command> <player> [seconds = 30]
     aliases: []
     permission: essentials.burn
     permission-message: '§4You do not have permission to use this command.'
@@ -76,7 +76,7 @@ commands:
     default: op
   lightning:
     description: The power of Thor. Strike at cursor or player.
-    usage: /<command> [player] [power]
+    usage: /<command> [player]
     aliases: [smite,strike,thor]
     permission: essentials.lightning
     permission-message: '§4You do not have permission to use this command.'
