@@ -43,6 +43,7 @@ public class MainPlugin extends JavaPlugin {
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdHat(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdGC(this);
         god = new com.steamcraftmc.EssentiallyMisc.Commands.CmdGod(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdNear(this);
                 
     	_listener = new WorldEvents(this);
         getServer().getPluginManager().registerEvents(_listener, this);
