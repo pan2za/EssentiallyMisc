@@ -50,3 +50,5 @@ messages:
   near-player: '&3{name}&6 - (&f{distance}m&6)'
   near-mob-prefix: '&6Nearby Mobs:'
   near-mob: '&2{name}&6 - (&f{count}&6)'
+  repair-invalid: '&cYou can not repair that item.'
+  repair: '&6Item repaired.'

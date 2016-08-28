@@ -28,7 +28,7 @@ commands:
     default: op
   repair:
     description: Repairs the durability of the item you are holding.
-    usage: /<command> [all]
+    usage: /<command>
     aliases: [fix]
     permission: essentials.repair
     permission-message: '§4You do not have permission to use this command.'
