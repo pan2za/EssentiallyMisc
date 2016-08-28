@@ -29,6 +29,7 @@ public class MainPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdFeed(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdHeal(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdFixLight(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdFly(this);
@@ -38,7 +39,8 @@ public class MainPlugin extends JavaPlugin {
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdBurn(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdLightning(this);
         fb = new com.steamcraftmc.EssentiallyMisc.Commands.CmdFireball(this);
-        
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdHat(this);
+                
     	_listener = new WorldEvents(this);
         getServer().getPluginManager().registerEvents(_listener, this);
         afk.start();

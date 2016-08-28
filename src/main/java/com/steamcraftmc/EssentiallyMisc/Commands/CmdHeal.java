@@ -1,11 +1,8 @@
 package com.steamcraftmc.EssentiallyMisc.Commands;
 
-import java.util.Map;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
@@ -14,8 +11,6 @@ import org.bukkit.potion.PotionEffect;
 import com.steamcraftmc.EssentiallyMisc.MainPlugin;
 
 public class CmdHeal extends BaseCommand {
-
-	Map<String, ConfigurationSection> allKits;
 
 	public CmdHeal(MainPlugin plugin) {
 		super(plugin, "heal", 0, 1);
