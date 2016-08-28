@@ -1,8 +1,4 @@
 # - v1.0 - Configuration
-lighting:
-  # chunk-radius
-  maxradius: 8
-
 near:
   # block-radius
   default: 25
@@ -24,4 +20,4 @@ messages:
   near-player: '&3{name}&6 - (&f{distance}m&6)'
   near-mob-prefix: '&6Nearby Mobs:'
   near-mob: '&2{name}&6 - (&f{count}&6)'
-  suicide: '&3{name}&f tragically committed suicide today, full story at 11:00.'
+  suicide: '&3{name}&f tragically committed suicide today.'
