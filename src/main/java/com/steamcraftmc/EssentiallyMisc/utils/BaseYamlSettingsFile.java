@@ -62,6 +62,10 @@ public abstract class BaseYamlSettingsFile {
         in.close();
     }
 
+	public String getRaw(String string) {
+		return this.configFile.getString(string);
+	}
+
 	private YamlConfiguration getConfig(String name, Object def) {
 		if (this.configFile == null) {
 			log(Level.SEVERE, "The configuration file " + _filename + " not been loaded.");
@@ -69,16 +73,20 @@ public abstract class BaseYamlSettingsFile {
 		}
 		if (!this.configFile.contains(name)) {
 			log(Level.WARNING, "The configuration does not contain property '" + name + "'.");
-			this.configFile.set(name, def);
-			try {
-				this.configFile.save(new File(_configLocation, _filename));
-			}
-			catch (IOException e) {
-	        	log(Level.SEVERE, e.toString());
-	        	e.printStackTrace();
-			}
+			Write(name, def);
 		}
 		return this.configFile;
+	}
+	
+	public void Write(String name, Object val) {
+		try {
+			this.configFile.set(name, val);
+			this.configFile.save(new File(_configLocation, _filename));
+		}
+		catch (IOException e) {
+        	log(Level.SEVERE, e.toString());
+        	e.printStackTrace();
+		}
 	}
 	
 	public String translate(String text) {

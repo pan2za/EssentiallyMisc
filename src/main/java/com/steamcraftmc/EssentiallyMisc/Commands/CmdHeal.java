@@ -1,11 +1,8 @@
 package com.steamcraftmc.EssentiallyMisc.Commands;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
-import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.potion.PotionEffect;
 
 import com.steamcraftmc.EssentiallyMisc.MainPlugin;
@@ -22,47 +19,36 @@ public class CmdHeal extends BaseCommand {
 		Player target = player;
         if (args.length > 0) {
         	if (!player.hasPermission("essentials.heal.others")) {
-        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You do not have permission to this command."));
+        		player.sendMessage(plugin.Config.NoAccess());
 	            return true;
         	}
         	target = Bukkit.getPlayer(args[0]);
         	if (target == null) {
-            	player.sendMessage(plugin.Config.format("message.player-not-found", "&cPlayer not found."));
+            	player.sendMessage(plugin.Config.PlayerNotFound(args[0]));
                 return true;
         	}
         }
 
         if (target.getHealth() == 0) {
-    		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Unable to return the dead to life."));
+    		player.sendMessage(plugin.Config.get("messages.heal-dead", "&4Unable to return the dead to life."));
             return true;
         }
 
-        healPlayer(target);
-        return true;
-	}
-	
-	public void healPlayer(Player player) {
-        
-        final double amount = player.getMaxHealth() - player.getHealth();
-        final EntityRegainHealthEvent erhe = new EntityRegainHealthEvent(player, amount, RegainReason.CUSTOM);
-        Bukkit.getPluginManager().callEvent(erhe);
-        if (erhe.isCancelled()) {
-    		return;
+        target.setHealth(target.getMaxHealth());
+        target.setFoodLevel(20);
+        target.setSaturation(10);
+        target.setFireTicks(0);
+		target.sendMessage(plugin.Config.get("messages.heal", "&6You have been healed."));
+        for (PotionEffect effect : target.getActivePotionEffects()) {
+            target.removePotionEffect(effect.getType());
         }
 
-        double newAmount = player.getHealth() + erhe.getAmount();
-        if (newAmount > player.getMaxHealth()) {
-            newAmount = player.getMaxHealth();
+        if (!player.equals(target)) {
+        	player.sendMessage(
+                	plugin.Config.format("messages.heal-other", "&6The player &3{name}&6 has been healed.", "name", target.getName())
+				);
         }
-
-        player.setHealth(newAmount);
-        player.setFoodLevel(20);
-        player.setFireTicks(0);
-		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6You have been healed."));
-        for (PotionEffect effect : player.getActivePotionEffects()) {
-            player.removePotionEffect(effect.getType());
-        }
-    	return;
+    	return true;
 	}
 
 }

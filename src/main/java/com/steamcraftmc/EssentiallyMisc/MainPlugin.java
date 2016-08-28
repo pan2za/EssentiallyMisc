@@ -11,6 +11,7 @@ public class MainPlugin extends JavaPlugin {
 	public Boolean _exLogging;
 	public final MainConfig Config;
 	public com.steamcraftmc.EssentiallyMisc.Commands.CmdAfk afk;
+	public com.steamcraftmc.EssentiallyMisc.Commands.CmdGod god;
 	public com.steamcraftmc.EssentiallyMisc.Commands.CmdFireball fb;
 
 	public MainPlugin() {
@@ -41,11 +42,13 @@ public class MainPlugin extends JavaPlugin {
         fb = new com.steamcraftmc.EssentiallyMisc.Commands.CmdFireball(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdHat(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdGC(this);
+        god = new com.steamcraftmc.EssentiallyMisc.Commands.CmdGod(this);
                 
     	_listener = new WorldEvents(this);
         getServer().getPluginManager().registerEvents(_listener, this);
         afk.start();
         fb.start();
+        god.start();
         log(Level.INFO, "Plugin listening for events.");
     }
 
@@ -53,6 +56,7 @@ public class MainPlugin extends JavaPlugin {
     public void onDisable() {
         afk.stop();
         fb.stop();
+        god.stop();
     	HandlerList.unregisterAll(_listener);
     }
 

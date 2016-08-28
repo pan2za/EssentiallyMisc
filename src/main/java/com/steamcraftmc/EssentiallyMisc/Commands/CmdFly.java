@@ -3,7 +3,6 @@ package com.steamcraftmc.EssentiallyMisc.Commands;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -21,43 +20,46 @@ public class CmdFly extends BaseCommand {
 	protected boolean doPlayerCommand(Player player, Command cmd, String commandLabel, String[] args) {
 		Player target = player;
         if (args.length > 0) {
-        	if (!player.hasPermission("essentials.heal.others")) {
-        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You do not have permission to this command."));
+        	if (!player.hasPermission("essentials.fly.others")) {
+        		player.sendMessage(plugin.Config.NoAccess());
 	            return true;
         	}
         	target = Bukkit.getPlayer(args[0]);
         	if (target == null) {
-        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Unable to locate player '" + args[0] + "'."));
+        		player.sendMessage(plugin.Config.PlayerNotFound(args[0]));
                 return true;
         	}
         }
 
         if (target.getHealth() == 0) {
-    		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Unable to make the dead fly."));
+    		player.sendMessage(plugin.Config.get("messages.fly-dead", "&4Unable to make the dead fly."));
             return true;
         }
 
-        toggleFly(target);
-        return true;
-	}
-	
-	void toggleFly(Player player) {
+        boolean enabled = !target.getAllowFlight();
 
-        boolean enabled = !player.getAllowFlight();
+        target.setFallDistance(0f);
+        target.setAllowFlight(enabled);
 
-        player.setFallDistance(0f);
-        player.setAllowFlight(enabled);
-
-        if (!player.getAllowFlight()) {
-        	player.setFlying(false);
+        if (!target.getAllowFlight()) {
+        	target.setFlying(false);
         }
 
         if (enabled) {
-        	player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6You have been given the gift of flight!"));
+    		target.sendMessage(plugin.Config.get("messages.fly-enabled", "&6You have been given the gift of flight!"));
         }
         else {
-        	player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6Flight is no longer within your power."));
+    		target.sendMessage(plugin.Config.get("messages.fly-disabled", "&6Flight is no longer within your power."));
         }
+        
+        if (!player.equals(target)) {
+        	player.sendMessage(
+        			enabled
+        			? plugin.Config.format("messages.fly-other-enabled", "&6Fly enabled for &3{name}&6.", "name", target.getName())
+                	: plugin.Config.format("messages.fly-other-disabled", "&6Fly disabled for &3{name}&6.", "name", target.getName())
+				);
+        }
+        return true;
 	}
 
 }

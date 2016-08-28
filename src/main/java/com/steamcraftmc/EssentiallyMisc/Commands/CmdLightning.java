@@ -25,7 +25,7 @@ public class CmdLightning extends BaseCommand {
         if (args.length > 0) {
         	pTarget = plugin.getServer().getPlayer(args[0]);
             if (pTarget == null) {
-            	player.sendMessage(plugin.Config.format("message.player-not-found", "&cPlayer not found."));
+            	player.sendMessage(plugin.Config.PlayerNotFound(args[0]));
             	return false;
             }
             target = pTarget.getLocation();
@@ -34,18 +34,18 @@ public class CmdLightning extends BaseCommand {
         	Set<Material> transparent = BlockUtil.getTransparentBlocks();
         	Block b = player.getTargetBlock(transparent, 100);
         	if (b == null) {
-            	player.sendMessage("&cThat is too far away.");
+            	player.sendMessage(plugin.Config.get("messages.lightning-too-far", "&cThat is too far away."));
             	return false;
         	}
         	target = b.getLocation();
         }
         
-
         target.getWorld().strikeLightningEffect(target);
         if (pTarget != null) {
             pTarget.sendMessage(plugin.Config.format("message.smitten", "&6You have been smitten."));
-        } 
-        player.sendMessage(plugin.Config.format("message.lightning", "&6You have unleashed the power of Thor!"));
+            player.sendMessage(plugin.Config.format("message.lightning", "&6You have unleashed the power of Thor!"));
+        }
+
         return true;
 	}
 }

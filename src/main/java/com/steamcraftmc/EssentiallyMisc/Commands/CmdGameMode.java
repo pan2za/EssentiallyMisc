@@ -3,7 +3,6 @@ package com.steamcraftmc.EssentiallyMisc.Commands;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.configuration.ConfigurationSection;
@@ -35,24 +34,30 @@ public class CmdGameMode extends BaseCommand {
         Player target = player;
         if (args.length > ix) {
         	if (!player.hasPermission("essentials.gamemode.others")) {
-        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You do not have permission to this command."));
+        		player.sendMessage(plugin.Config.NoAccess());
         		return true;
         	}
         	target = Bukkit.getPlayer(args[ix]);
         	if (target == null) {
-        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Unable to locate player '" + args[0] + "'."));
+        		player.sendMessage(plugin.Config.PlayerNotFound(args[0]));
         		return true;
         	}
         }
 
         if (!player.hasPermission("essentials.gamemode.all") && !player.hasPermission("essentials.gamemode." + gameMode.name().toLowerCase())) {
-    		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You do not have permission to this command."));
+    		player.sendMessage(plugin.Config.NoAccess());
             return true;
         }
         
  		target.setGameMode(gameMode);
- 		target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6You game mode has been changed."));
-        return true;
+ 		target.sendMessage(plugin.Config.format("messages.gamemode", "&6You game mode has been changed.", "mode", gameMode.toString().toLowerCase()));
+
+        if (!player.equals(target)) {
+	    	player.sendMessage(
+	    			plugin.Config.format("messages.gamemode-other", "&6Gamemode changed for &3{name}&6.", "name", target.getName())
+				);
+        }
+ 		return true;
 	}
 	
 

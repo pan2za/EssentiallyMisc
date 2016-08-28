@@ -4,7 +4,6 @@ import java.util.logging.Level;
 
 import com.steamcraftmc.EssentiallyMisc.MainPlugin;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -47,7 +46,7 @@ public abstract class BaseCommand implements CommandExecutor {
 	protected abstract boolean doPlayerCommand(Player player, Command cmd, String commandLabel, String[] args) throws Exception;
     
     protected boolean doConsoleCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) throws Exception {
-    	sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Command should be used by a player."));
+    	sender.sendMessage(plugin.Config.get("messages.no-console", "&4Command should be used by a player."));
     	return true;
     }
     
@@ -63,7 +62,7 @@ public abstract class BaseCommand implements CommandExecutor {
 		        Player player = (Player) sender;
 		        
 		        if (!sender.hasPermission(permission)) {
-		            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You do not have permission to this command."));
+		            sender.sendMessage(plugin.Config.NoAccess());
 		            plugin.log(Level.SEVERE, "The user " + player.getName() + " need permission " + permission + " to access to the command " + cmdName);
 		            return true;
 		        }

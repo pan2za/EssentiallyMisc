@@ -14,7 +14,7 @@ public class CmdBurn extends BaseCommand {
 	protected boolean doPlayerCommand(Player player, Command cmd, String commandLabel, String[] args) throws Exception {
         Player target = plugin.getServer().getPlayer(args[0]);
         if (target == null) {
-        	player.sendMessage(plugin.Config.format("message.player-not-found", "&cPlayer not found."));
+        	player.sendMessage(plugin.Config.PlayerNotFound(args[0]));
         	return false;
         }
 

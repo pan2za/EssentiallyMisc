@@ -1,8 +1,8 @@
 package com.steamcraftmc.EssentiallyMisc.Commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
+
 import com.steamcraftmc.EssentiallyMisc.MainPlugin;
 
 public class CmdFeed extends BaseCommand {
@@ -16,30 +16,32 @@ public class CmdFeed extends BaseCommand {
 
 		Player target = player;
         if (args.length > 0) {
-        	if (!player.hasPermission("essentials.heal.others")) {
-        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You do not have permission to this command."));
+        	if (!player.hasPermission("essentials.feed.others")) {
+        		player.sendMessage(plugin.Config.NoAccess());
 	            return true;
         	}
         	target = player.getServer().getPlayer(args[0]);
         	if (target == null) {
-            	player.sendMessage(plugin.Config.format("message.player-not-found", "&cPlayer not found."));
+            	player.sendMessage(plugin.Config.PlayerNotFound(args[0]));
                 return true;
         	}
         }
 
         if (target.getHealth() == 0) {
-    		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Unable to feed the dead."));
+    		player.sendMessage(plugin.Config.get("messages.feed-dead", "&4Unable to feed the dead."));
             return true;
         }
 
-        feedPlayer(target);
-        return true;
-	}
-	
-	public void feedPlayer(Player player) {
-        player.setFoodLevel(20);
-		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&6You have been satiated."));
-    	return;
+        target.setFoodLevel(20);
+        target.setSaturation(10);
+		target.sendMessage(plugin.Config.get("messages.feed", "&4You have been satiated."));
+
+		if (!player.equals(target)) {
+        	player.sendMessage(
+                	plugin.Config.format("messages.feed-other", "&6The player &3{name}&6 has been fed.", "name", target.getName())
+				);
+        }
+		return true;
 	}
 
 }

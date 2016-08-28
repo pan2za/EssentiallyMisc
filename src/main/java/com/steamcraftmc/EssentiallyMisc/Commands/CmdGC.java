@@ -1,6 +1,7 @@
 package com.steamcraftmc.EssentiallyMisc.Commands;
 
-import org.bukkit.*;
+import org.bukkit.Chunk;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -52,7 +53,8 @@ public class CmdGC extends BaseCommand {
                     tileEntities += chunk.getTileEntities().length;
                 }
             } catch (java.lang.ClassCastException ex) {
-                Bukkit.getLogger().log(Level.SEVERE, "Corrupted chunk data on world " + w, ex);
+            	ex.printStackTrace();
+                plugin.log(Level.SEVERE, "Corrupted chunk data on world " + w);
             }
 
             sender.sendMessage(plugin.Config.format("messages.gcworld", 
