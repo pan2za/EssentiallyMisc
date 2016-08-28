@@ -32,7 +32,7 @@ public class CmdHeal extends BaseCommand {
         	}
         	target = Bukkit.getPlayer(args[0]);
         	if (target == null) {
-        		player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4Unable to locate player '" + args[0] + "'."));
+            	player.sendMessage(plugin.Config.format("message.player-not-found", "&cPlayer not found."));
                 return true;
         	}
         }

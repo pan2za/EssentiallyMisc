@@ -25,7 +25,7 @@ public class CmdLightning extends BaseCommand {
         if (args.length > 0) {
         	pTarget = plugin.getServer().getPlayer(args[0]);
             if (pTarget == null) {
-            	player.sendMessage("&cPlayer not found.");
+            	player.sendMessage(plugin.Config.format("message.player-not-found", "&cPlayer not found."));
             	return false;
             }
             target = pTarget.getLocation();
@@ -43,9 +43,9 @@ public class CmdLightning extends BaseCommand {
 
         target.getWorld().strikeLightningEffect(target);
         if (pTarget != null) {
-            pTarget.sendMessage("&6You have been smitten.");
+            pTarget.sendMessage(plugin.Config.format("message.smitten", "&6You have been smitten."));
         } 
-        player.sendMessage("&6You have unleashed the power of Thor!");
+        player.sendMessage(plugin.Config.format("message.lightning", "&6You have unleashed the power of Thor!"));
         return true;
 	}
 }

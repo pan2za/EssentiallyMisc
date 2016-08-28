@@ -14,7 +14,7 @@ public class CmdBurn extends BaseCommand {
 	protected boolean doPlayerCommand(Player player, Command cmd, String commandLabel, String[] args) throws Exception {
         Player target = plugin.getServer().getPlayer(args[0]);
         if (target == null) {
-        	player.sendMessage("&cPlayer not found.");
+        	player.sendMessage(plugin.Config.format("message.player-not-found", "&cPlayer not found."));
         	return false;
         }
 
@@ -24,7 +24,7 @@ public class CmdBurn extends BaseCommand {
         }
 
         target.setFireTicks(seconds * 20);
-        player.sendMessage("&6Player has been set on fire.");
+    	player.sendMessage(plugin.Config.format("message.burn", "&cPlayer has been set on fire."));
         return true;
 	}
 }
