@@ -46,7 +46,7 @@ public class CmdNear extends BaseCommand {
                 		sb.append("\n");
                     	sb.append(
                     			plugin.Config.format("messages.near-player", "&3{name}&6 - (&f{distance}m&6)",
-                    					"name", player.getName(), "distance", (long)Math.sqrt(delta))
+                    					"name", e.getName(), "distance", (long)Math.sqrt(delta))
                 			);
                     }
         		}
