@@ -32,10 +32,31 @@ commands:
     permission: essentials.near
     permission-message: '§4You do not have permission to use this command.'
     default: op
+  recipe:
+    description: Display the recipe for an item.
+    usage: /<command> <item>
+    aliases: []
+    permission: essentials.recipe
+    permission-message: '§4You do not have permission to use this command.'
+    default: true
   suicide:
     description: Prove your mortality.
     usage: /<command>
     aliases: []
     permission: essentials.suicide
+    permission-message: '§4You do not have permission to use this command.'
+    default: true
+  workbench:
+    description: Open and use a workbench.
+    usage: /<command>
+    aliases: [craft]
+    permission: essentials.workbench
+    permission-message: '§4You do not have permission to use this command.'
+    default: op
+  enderchest:
+    description: Open and access your enderchest anywhere.
+    usage: /<command>
+    aliases: [echest]
+    permission: essentials.enderchest
     permission-message: '§4You do not have permission to use this command.'
     default: true

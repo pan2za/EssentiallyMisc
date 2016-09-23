@@ -66,6 +66,9 @@ public class CmdNear extends BaseCommand {
         }
         
         if (counts.size() > 0) {
+        	if (sb.length() > 0) {
+        		sb.append('\n');
+        	}
             sb.append(plugin.Config.get("messages.near-mob-prefix", "&6Nearby Mobs:"));
         	for (EntityType etype : counts.keySet()) {
         		sb.append("\n");

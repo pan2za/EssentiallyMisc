@@ -11,6 +11,7 @@ public class MainPlugin extends JavaPlugin {
 	public Boolean _exLogging;
 	public final MainConfig Config;
 	public com.steamcraftmc.EssentiallyMisc.Commands.CmdAfk afk;
+	public com.steamcraftmc.EssentiallyMisc.Commands.CmdRecipe recipe;
 
 	public MainPlugin() {
 		_exLogging = true;
@@ -33,15 +34,20 @@ public class MainPlugin extends JavaPlugin {
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdHat(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdNear(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdSuicide(this);
+        recipe = new com.steamcraftmc.EssentiallyMisc.Commands.CmdRecipe(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdEnderChest(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdWorkbench(this);
                 
     	_listener = new WorldEvents(this);
         getServer().getPluginManager().registerEvents(_listener, this);
         afk.start();
+        recipe.start();
         log(Level.INFO, "Plugin listening for events.");
     }
 
     @Override
     public void onDisable() {
+        recipe.stop();
         afk.stop();
     	HandlerList.unregisterAll(_listener);
     }
