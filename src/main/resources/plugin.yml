@@ -11,6 +11,13 @@ commands:
     permission: essentials.afk
     permission-message: '§4You do not have permission to use this command.'
     default: true
+  me:
+    description: Emotes the specified action in chat.
+    usage: /<command> <action>
+    aliases: [em]
+    permission: essentials.me
+    permission-message: '§4You do not have permission to use this command.'
+    default: true
   hat:
     description: Get some cool new headgear.
     usage: /<command> [remove]

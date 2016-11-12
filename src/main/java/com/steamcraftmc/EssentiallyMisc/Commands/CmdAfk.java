@@ -109,8 +109,8 @@ public class CmdAfk extends BaseCommand implements Listener, Runnable {
 		if (info.isAfk && player.isOnline()) {
 			info.isAfk = false;
 			String message = plugin.Config.format("messages.afk-return", "&8* &3{name}&8 is no longer afk *", "name", player.getName()); 
-			player.getServer().broadcastMessage(message);
-			//player.sendMessage(message);
+			// player.getServer().broadcastMessage(message);
+			// player.sendMessage(message);
 			player.getServer().dispatchCommand(player.getServer().getConsoleSender(), "broadcast " + message);
 		}
 	}

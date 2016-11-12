@@ -31,6 +31,7 @@ public class MainPlugin extends JavaPlugin {
     public void onEnable() {
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdSetText(this);
         afk = new com.steamcraftmc.EssentiallyMisc.Commands.CmdAfk(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdMe(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdHat(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdNear(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdSuicide(this);
