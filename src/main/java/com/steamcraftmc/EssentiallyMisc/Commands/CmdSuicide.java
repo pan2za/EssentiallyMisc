@@ -12,7 +12,8 @@ public class CmdSuicide extends BaseCommand {
 
 	@Override
 	protected boolean doPlayerCommand(Player player, Command cmd, String commandLabel, String[] args) throws Exception {
-        player.getServer().broadcastMessage(plugin.Config.format("messages.suicide", "&3{name}&f tragically committed suicide today.", "name", player.getName()));
+        String msg = plugin.Config.format("messages.suicide", "&3{name}&f tragically committed suicide today.", "name", player.getName());
+		player.getServer().dispatchCommand(player.getServer().getConsoleSender(), "broadcast " + msg);
 
         @SuppressWarnings("deprecation")
 		EntityDamageEvent ede = new EntityDamageEvent(player, EntityDamageEvent.DamageCause.SUICIDE, Short.MAX_VALUE);

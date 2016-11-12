@@ -93,8 +93,9 @@ public class CmdAfk extends BaseCommand implements Listener, Runnable {
 			String message = args.length == 0 
 					? plugin.Config.format("messages.afk", "&8* &3{name}&8 is now afk *", "name", player.getName()) 
 					: plugin.Config.format("messages.afk-message", "&8* &3{name}&8 is now afk: {message} *", "name", player.getName(), "message", String.join(" ", args));
-			player.getServer().broadcastMessage(message);
-			player.sendMessage(message);
+			//player.getServer().broadcastMessage(message);
+			//player.sendMessage(message);
+			player.getServer().dispatchCommand(player.getServer().getConsoleSender(), "broadcast " + message);
 			info.goAfk();
 		}
 		else {
@@ -109,7 +110,8 @@ public class CmdAfk extends BaseCommand implements Listener, Runnable {
 			info.isAfk = false;
 			String message = plugin.Config.format("messages.afk-return", "&8* &3{name}&8 is no longer afk *", "name", player.getName()); 
 			player.getServer().broadcastMessage(message);
-			player.sendMessage(message);
+			//player.sendMessage(message);
+			player.getServer().dispatchCommand(player.getServer().getConsoleSender(), "broadcast " + message);
 		}
 	}
 
