@@ -24,14 +24,19 @@
             </resource>
         </resources>
     </build>
-
+     <repositories>
+      <repository>
+  		<id>bukkit-repo</id>
+  		<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+  	</repository>
+   </repositories>
     <dependencies>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.9-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../spigot/spigot.jar</systemPath>
-        </dependency>
+  	    <dependency>
+  	      <groupId>org.bukkit</groupId>
+  		  <artifactId>bukkit</artifactId>
+  		  <version>1.8.3-R0.1-SNAPSHOT</version>
+  		  <type>jar</type>
+  		  <scope>provided</scope>
+  	  </dependency>
     </dependencies>
 </project>

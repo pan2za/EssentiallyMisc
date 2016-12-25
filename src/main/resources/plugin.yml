@@ -67,3 +67,15 @@ commands:
     permission: essentials.enderchest
     permission-message: '§4You do not have permission to use this command.'
     default: true
+  pos:
+    description: Displays your position or teleports you to another.
+    usage: "Usage: '/pos' to get current position, or '/pos x y z' to teleport to x,y,z"
+  listit:
+    description: Displays all materials.
+    usage: "Usage: '/listit' to get current all materials, or '/listit x' to get something like x material"
+  get:
+    description: Displays all materials.
+    usage: "Usage: '/get x y' to get current x material y times, x is block id"
+  king:
+    description: make all materials.
+    usage: "Usage: '/king' to get current  material"

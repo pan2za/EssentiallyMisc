@@ -33,6 +33,10 @@ public class MainPlugin extends JavaPlugin {
         afk = new com.steamcraftmc.EssentiallyMisc.Commands.CmdAfk(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdMe(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdHat(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdKing(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdPos(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdListitems(this);
+        new com.steamcraftmc.EssentiallyMisc.Commands.CmdGetblock(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdNear(this);
         new com.steamcraftmc.EssentiallyMisc.Commands.CmdSuicide(this);
         recipe = new com.steamcraftmc.EssentiallyMisc.Commands.CmdRecipe(this);

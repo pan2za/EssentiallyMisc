@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import org.bukkit.Material;
 
-import net.minecraft.server.v1_10_R1.Item;
-import net.minecraft.server.v1_10_R1.ItemStack;
+
+import org.bukkit.inventory.ItemStack;
 
 public class BlockUtil {
 
@@ -44,8 +44,8 @@ public class BlockUtil {
 	public static String itemName(int blockId, int blockData, boolean hasData) {
 		String tmp = null;
 		try {
-			ItemStack stck = new ItemStack(Item.getById(blockId), 0, blockData);
-			tmp = stck == null ? null : stck.getName();
+			ItemStack stck = new ItemStack(blockId, blockData);
+			tmp = stck == null ? null : stck.getType().name();
 		}
 		catch (Exception e) {}
 		if (tmp == null || tmp.length() == 0) {

@@ -28,7 +28,7 @@ import org.bukkit.inventory.ShapelessRecipe;
 import com.steamcraftmc.EssentiallyMisc.MainPlugin;
 import com.steamcraftmc.EssentiallyMisc.utils.BlockUtil;
 
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 
 public class CmdRecipe extends BaseCommand implements Listener, Runnable, TabCompleter {
 	public final TreeMap<String, ItemStack> _itemDB = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
